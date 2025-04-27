@@ -1,0 +1,56 @@
+{% load static %}
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Automóvil</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+    <!-- CSS Principal de Datta Able -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4 class="mb-0">Editar Automóvil</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_marca" class="form-label"><strong>Marca</strong></label>
+                                {{ form.marca|add_class:"form-control" }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_modelo" class="form-label"><strong>Modelo</strong></label>
+                                {{ form.modelo|add_class:"form-control" }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_año" class="form-label"><strong>Año</strong></label>
+                                {{ form.año|add_class:"form-control" }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_color" class="form-label"><strong>Color</strong></label>
+                                {{ form.color|add_class:"form-control" }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_precio" class="form-label"><strong>Precio</strong></label>
+                                {{ form.precio|add_class:"form-control" }}
+                            </div>
+                            <button type="submit" class="btn btn-warning w-100">Actualizar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

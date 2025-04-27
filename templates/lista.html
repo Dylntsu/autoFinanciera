@@ -1,0 +1,104 @@
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Automóviles</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+    <!-- CSS Principal de Datta Able -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- Menú lateral (Sidebar) -->
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand">
+                <a href="#">
+                    <h4>Autofinanciera</h4>
+                </a>
+            </div>
+            <div class="navbar-content">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item">
+                        <a href="{% url 'lista_automoviles' %}" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'crear_automovil' %}" class="nav-link">Agregar Automóvil</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Encabezado (Header) -->
+    <header class="navbar pcoded-header">
+        <div class="navbar-wrapper">
+            <div class="navbar-content">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Administración de Automóviles</h5>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Lista de Automóviles</h5>
+                            <a href="{% url 'crear_automovil' %}" class="btn btn-primary" style="float: right;">Agregar Nuevo</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Marca</th>
+                                            <th>Modelo</th>
+                                            <th>Año</th>
+                                            <th>Color</th>
+                                            <th>Precio</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for auto in autos %}
+                                        <tr>
+                                            <td>{{ auto.marca }}</td>
+                                            <td>{{ auto.modelo }}</td>
+                                            <td>{{ auto.año }}</td>
+                                            <td>{{ auto.color }}</td>
+                                            <td>${{ auto.precio }}</td>
+                                            <td>
+                                                <a href="{% url 'detalle_automovil' auto.id %}" class="btn btn-info btn-sm">Ver</a>
+                                                <a href="{% url 'editar_automovil' auto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                                <a href="{% url 'eliminar_automovil' auto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="6" class="text-center">No hay automóviles registrados.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Scripts -->
+<script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
+<script src="{% static 'assets/js/pcoded.min.js' %}"></script>
+
+</body>
+</html>
