@@ -1,6 +1,7 @@
 from .models import Automovil
 from .forms import AutomovilForm
 from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib import messages
 # Create your views here.
 
 def lista_automoviles(request):
@@ -12,7 +13,10 @@ def crear_automovil(request):
         form = AutomovilForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'El automóvil se guardó exitosamente.')
             return redirect('lista_automoviles')
+        else:
+            print("Errores en el formulario:", form.errors)  # Debug: Print form errors
     else:
         form = AutomovilForm()
     return render(request, 'crear.html', {'form': form})

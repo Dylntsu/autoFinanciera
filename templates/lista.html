@@ -7,136 +7,57 @@
     <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <!-- CSS Principal -->
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-        }
-        .navbar {
-            background-color: #343a40;
-            color: white;
-        }
-        .navbar a {
-            color: white;
-        }
-        .card {
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .table th {
-            background-color: #343a40;
-            color: white;
-        }
-        .btn {
-            border-radius: 20px;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            border: none;
-        }
-        .btn-danger:hover {
-            background-color: #a71d2a;
-        }
-    </style>
 </head>
 
 <body>
-
-    <!-- Menú lateral (Sidebar) -->
-    <nav class="pcoded-navbar">
-        <div class="navbar-wrapper">
-            <div class="navbar-brand">
-                <a href="#">
-                    <h4>Autofinanciera</h4>
-                </a>
-            </div>
-            <div class="navbar-content">
-                <ul class="nav pcoded-inner-navbar">
-                    <li class="nav-item">
-                        <a href="{% url 'lista_automoviles' %}" class="nav-link">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'crear_automovil' %}" class="nav-link">Agregar Automóvil</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Encabezado (Header) -->
-    <header class="navbar pcoded-header">
-        <div class="navbar-wrapper">
-            <div class="navbar-content">
-                <div class="page-header-title">
-                    <h5 class="m-b-10">Administración de Automóviles</h5>
-                </div>
-            </div>
+    <!-- Encabezado -->
+    <header class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Automóviles</span>
         </div>
     </header>
 
     <!-- Contenido principal -->
-    <div class="pcoded-main-container">
-        <div class="pcoded-content">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5>Lista de Automóviles</h5>
-                            <a href="{% url 'crear_automovil' %}" class="btn btn-primary">Agregar Nuevo</a>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Marca</th>
-                                            <th>Modelo</th>
-                                            <th>Año</th>
-                                            <th>Color</th>
-                                            <th>Precio</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for auto in autos %}
-                                        <tr>
-                                            <td>{{ auto.marca }}</td>
-                                            <td>{{ auto.modelo }}</td>
-                                            <td>{{ auto.año }}</td>
-                                            <td>{{ auto.color }}</td>
-                                            <td>${{ auto.precio }}</td>
-                                            <td>
-                                                <a href="{% url 'detalle_automovil' auto.id %}" class="btn btn-info btn-sm">Ver</a>
-                                                <a href="{% url 'editar_automovil' auto.id %}" class="btn btn-warning btn-sm">Editar</a>
-                                                <a href="{% url 'eliminar_automovil' auto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                            </td>
-                                        </tr>
-                                        {% empty %}
-                                        <tr>
-                                            <td colspan="6" class="text-center">No hay automóviles registrados.</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Lista de Automóviles</h2>
+            <a href="{% url 'crear_automovil' %}" class="btn btn-success">Agregar Automóvil</a>
         </div>
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Año</th>
+                    <th>Color</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for auto in autos %}
+                <tr>
+                    <td>{{ auto.marca }}</td>
+                    <td>{{ auto.modelo }}</td>
+                    <td>{{ auto.año }}</td>
+                    <td>{{ auto.color }}</td>
+                    <td>${{ auto.precio }}</td>
+                    <td>
+                        <a href="{% url 'detalle_automovil' auto.id %}" class="btn btn-info btn-sm">Ver</a>
+                        <a href="{% url 'editar_automovil' auto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'eliminar_automovil' auto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">No hay automóviles registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    <!-- Scripts -->
+    <!-- Bootstrap JS -->
     <script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
-    <script src="{% static 'assets/js/pcoded.min.js' %}"></script>
-
 </body>
 </html>
