@@ -1,44 +1,32 @@
 from .models import Automovil
 from .forms import AutomovilForm
-from django.shortcuts import render,redirect,get_object_or_404
-from django.contrib import messages
-# Create your views here.
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
-def lista_automoviles(request):
-    autos = Automovil.objects.all()
-    return render(request, 'lista.html', {'autos': autos})
+class AutomovilListView(LoginRequiredMixin, ListView):
+    model = Automovil
+    template_name = 'lista.html'
+    context_object_name = 'autos'
 
-def crear_automovil(request):
-    if request.method == 'POST':
-        form = AutomovilForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'El automóvil se guardó exitosamente.')
-            return redirect('lista_automoviles')
-        else:
-            print("Errores en el formulario:", form.errors)  # Debug: Print form errors
-    else:
-        form = AutomovilForm()
-    return render(request, 'crear.html', {'form': form})
+class AutomovilDetailView(LoginRequiredMixin, DetailView):
+    model = Automovil
+    template_name = 'detalle.html'
+    context_object_name = 'auto'
 
-def detalle_automovil(request, id):
-    auto = get_object_or_404(Automovil, id=id)
-    return render(request, 'detalle.html', {'auto': auto})
+class AutomovilCreateView(LoginRequiredMixin, CreateView):
+    model = Automovil
+    form_class = AutomovilForm
+    template_name = 'crear.html'
+    success_url = reverse_lazy('lista_automoviles')
 
-def editar_automovil(request, id):
-    auto = get_object_or_404(Automovil, id=id)
-    if request.method == 'POST':
-        form = AutomovilForm(request.POST, instance=auto)
-        if form.is_valid():
-            form.save()
-            return redirect('lista_automoviles')
-    else:
-        form = AutomovilForm(instance=auto)
-    return render(request, 'editar.html', {'form': form})
+class AutomovilUpdateView(LoginRequiredMixin, UpdateView):
+    model = Automovil
+    form_class = AutomovilForm
+    template_name = 'editar.html'
+    success_url = reverse_lazy('lista_automoviles')
 
-def eliminar_automovil(request, id):
-    auto = get_object_or_404(Automovil, id=id)
-    if request.method == 'POST':
-        auto.delete()
-        return redirect('lista_automoviles')
-    return render(request, 'eliminar.html', {'auto': auto})
+class AutomovilDeleteView(LoginRequiredMixin, DeleteView):
+    model = Automovil
+    template_name = 'eliminar.html'
+    success_url = reverse_lazy('lista_automoviles')

@@ -125,7 +125,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'node_modules'),  # Incluye la carpeta node_modules
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Para producción
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'

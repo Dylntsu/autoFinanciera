@@ -58,14 +58,14 @@
 
                         <script>
                             document.getElementById('guardar-btn').addEventListener('click', function(event) {
-                                event.preventDefault(); // Evita el envío inmediato del formulario
+                                event.preventDefault();
                                 const toastElement = document.getElementById('toast');
                                 toastElement.style.display = 'block';
                                 const toast = new bootstrap.Toast(toastElement);
                                 toast.show();
                                 setTimeout(function() {
-                                    document.querySelector('form').submit(); // Envía el formulario después de mostrar el toast
-                                }, 3000); // Espera 3 segundos antes de enviar el formulario
+                                    document.querySelector('form').submit();
+                                }, 3000); 
                             });
                         </script>
                     </div>
