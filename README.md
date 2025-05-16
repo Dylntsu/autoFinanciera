@@ -82,10 +82,10 @@ Este proyecto es una aplicación web desarrollada con Django para la administrac
 - Haz pruebas antes de subir cambios al repositorio remoto.
 
 ## Créditos
-- Proyecto realizado por: [Tu Nombre]
+- Proyecto realizado por: Dylan Salcedo
 - Materia: Administración de Proyectos en TI
 - Fecha: Mayo 2025
 
 ---
 
-¡Gracias por revisar este proyecto!
+Gracias por revisar este proyecto!
